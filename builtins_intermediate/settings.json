@@ -1,0 +1,7 @@
+{
+  "app_name": "Python Study App",
+  "version": "1.0.0",
+  "features": ["lessons", "menu", "quizzes", "progress"],
+  "active": true,
+  "max_users": 100
+}

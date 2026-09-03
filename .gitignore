@@ -1,0 +1,104 @@
+# ---------------------------------------------------------------------------
+# Python project .gitignore
+# ---------------------------------------------------------------------------
+# This file tells git which files/folders to IGNORE (not track).
+#
+# NOTE: The `.vscode/` folder is intentionally NOT ignored. It contains
+# shared settings (like `launch.json`) that the team wants committed to
+# GitHub so everyone gets the same debug configuration out of the box.
+# Do not add `.vscode/` to this file.
+# ---------------------------------------------------------------------------
+
+# --- Byte-compiled / optimized / DLL files --------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Distribution / packaging ---------------------------------------------
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# --- Virtual environments --------------------------------------------------
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+pythonenv*/
+
+# --- Test / coverage / linting --------------------------------------------
+.pytest_cache/
+.coverage
+.coverage.*
+.hypothesis/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+*.py,cover
+
+# --- Jupyter Notebook ------------------------------------------------------
+.ipynb_checkpoints/
+*_files/
+
+# --- IPython ---------------------------------------------------------------
+profile_default/
+ipython_config.py
+
+# --- Environments / secrets ------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# --- OS / editor junk ------------------------------------------------------
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*~
+.idea/
+*.iml
+
+# --- Generated CSV output files (created by the tutorials) -----------------
+# These are produced when you run the tutorial programs. They are meant to
+# be inspected locally and recreated on demand, so they are not committed.
+builtins_intermediate/copied_notes.txt
+builtins_intermediate/log_summary.json
+builtins_advanced/managed_file.txt
+csv_basics_built_in/managers.csv
+csv_basics_built_in/numbers.csv
+csv_basics_built_in/tricky.csv
+csv_pandas_basics/high_sales.csv
+csv_pandas_basics/monthly_summary.csv
+csv_pandas_intermediate/enriched_sales.csv
+csv_pandas_intermediate/pivot_summary.csv
+csv_pandas_advanced/pipeline_output.csv
+numpy_basics/saved_array.txt
+numpy_basics/saved_array.npy
+builtins_intermediate/copied_notes.txt
+builtins_intermediate/log_summary.json
+builtins_advanced/managed_file.txt

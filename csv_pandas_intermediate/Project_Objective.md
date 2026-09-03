@@ -1,0 +1,122 @@
+# 📊 Pandas Intermediate with Python
+
+Below is a complete, runnable Python application designed to take a learner
+**from pandas basics to intermediate-level data manipulation**. Building on the
+`csv_pandas_basics` folder, this interactive "study session" adds the tools you
+reach for on real-world data: handling missing values, sorting & ranking,
+dates & times, merging tables, pivot tables, custom functions, and string
+operations — all with real working examples, heavy commenting, and links to the
+official pandas documentation.
+
+> This folder covers **intermediate pandas**. Advanced pandas (time-series
+> resampling, window functions, stacked/unstacked reshaping, MultiIndex, and
+> large-scale / memory techniques) will be built out in the advanced folder.
+
+---
+
+## Code Analysis Summary
+
+- **Purpose:** A single-file interactive teaching tool that demonstrates
+  intermediate-level pandas techniques on two small CSV files.
+- **Concepts covered:** missing values (`isna`/`dropna`/`fillna`), sorting &
+  ranking (`sort_values`, `rank`), dates (`to_datetime`, `.dt` accessor),
+  merging (`pd.merge` with inner/left joins), pivot tables (`pivot_table`),
+  vectorized vs `.apply()` functions, string methods (`.str` accessor),
+  writing enriched results, and combining everything in a mini task.
+- **Style:** Heavily commented so each construct is explained _where it
+  appears_; safe for beginners continuing from basics — the only files it
+  creates are small CSV outputs in the same folder (`enriched_sales.csv`,
+  `pivot_summary.csv`).
+- **Notable patterns:** Reuses the `read_csv_pandas()` / `write_csv_pandas()`
+  helper convention from the basics folder; uses `data_path()` so paths resolve
+  relative to the script (works from any folder); a `main()` menu loop and a
+  classic `if __name__ == "__main__"` guard.
+
+---
+
+## The Concepts (one per section)
+
+| #   | Concept                    | What it shows                                                       |
+| --- | -------------------------- | ------------------------------------------------------------------- |
+| 1   | Handling missing values    | `isna()`, `dropna()`, `fillna(0)`, mean imputation; floats from NaN |
+| 2   | Sorting & ranking          | `sort_values` (single & multi-column), `rank`                       |
+| 3   | Working with dates & times | `pd.to_datetime`, `.dt.year/quarter/day_name`, date math            |
+| 4   | Merging & joining          | `pd.merge` inner vs left joins on a key; using merged columns       |
+| 5   | Pivot tables               | `groupby` on multiple columns; `pivot_table` reshape with `aggfunc` |
+| 6   | Vectorized & `.apply()`    | Whole-column ops vs row-wise custom functions; `.loc` alternative   |
+| 7   | String operations          | `.str.lower/contains/startswith/replace` on text columns            |
+| 8   | Writing enriched results   | Persist the merged + computed columns and a pivot summary           |
+| 9   | Mini task                  | Most profitable product per region — merges the whole lesson        |
+
+---
+
+## Design Principles
+
+### 1. Assumes pandas basics are done
+
+This folder intentionally advances past `read_csv`, `groupby`+`sum`, and basic
+filtering. If you don't recognize those yet, complete `csv_pandas_basics`
+first. The helpers (`read_csv_pandas`, `write_csv_pandas`) are reused as-is so
+the learner sees continuity.
+
+### 2. Realistic, messy sample data
+
+`sales_data.csv` is **deliberately missing values** (empty `amount` and
+`rating` cells). This is the single most important thing intermediate pandas
+learners must master, and it makes every section feel like real work.
+
+### 3. Two tables, because real data is relational
+
+A second lookup table — `product_info.csv` (category / supplier / cost) —
+makes the merge/join section meaningful and enables the profit calculation in
+the mini task.
+
+### 4. One-concept-per-section
+
+Like every other folder in this repo, each section is its own function so a
+learner can study it in isolation and re-run any part on demand.
+
+### 5. Progression from easy → applied
+
+- Sections 1–3 extend what a single table can tell us (clean, sort, date).
+- Sections 4–5 combine tables and reshape them (merge, pivot).
+- Sections 6–7 add the expressive tools (custom functions, strings).
+- Section 8 shows persistence.
+- Section 9 ties everything together with a practical, realistic task.
+
+### 6. Vectorized-first mindset
+
+Section 6 explicitly contrasts _fast vectorized_ operations with `.apply()` and
+shows the `.loc`-based equivalent, teaching learners why pandas is fast and
+when a custom function is the right tool.
+
+---
+
+## Files in this folder
+
+```
+csv_pandas_intermediate/
+├── pandas_intermediate.py  # the tutorial program (menu-driven)
+├── sales_data.csv          # sample sales data (20 rows, some missing values)
+├── product_info.csv        # product lookup table (category / supplier / cost)
+├── enriched_sales.csv      # generated by Section 8 (merged + profit)
+├── pivot_summary.csv       # generated by Section 8 (regions x products)
+├── Project_Objective.md    # design notes & concept breakdown (this file)
+└── README.md               # how to run & debug
+```
+
+> `enriched_sales.csv` and `pivot_summary.csv` are created automatically when
+> you run Section 8 — they did not need to be checked in.
+
+---
+
+## Getting Started
+
+```powershell
+pip install pandas
+python pandas_intermediate.py
+```
+
+Type a number `1`–`9` to run a section, or `q` to quit.
+
+See `README.md` for full running and debugging instructions.

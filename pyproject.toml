@@ -1,0 +1,56 @@
+# ---------------------------------------------------------------------------
+# Project configuration for the Programmer Learns Python lessons
+# Managed with uv (https://docs.astral.sh/uv/)
+# ---------------------------------------------------------------------------
+[project]
+name = "python-for-beginners"
+version = "0.1.0"
+description = "A collection of self-guided, interactive Python lessons for beginners."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.0",
+]
+
+# ---------------------------------------------------------------------------
+# Development / tooling dependencies (not needed to run the lessons)
+# ---------------------------------------------------------------------------
+[dependency-groups]
+dev = [
+    "ruff>=0.16",
+    "pytest>=8.0",  # groundwork for a future "testing with pytest" lesson
+]
+
+# ---------------------------------------------------------------------------
+# Ruff configuration — linter & formatter
+# Docs: https://docs.astral.sh/ruff/
+# ---------------------------------------------------------------------------
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+
+[tool.ruff.lint]
+# E = pycodestyle errors, F = pyflakes (real bugs), W = warnings
+# I = import sorting, UP = modernize (pyupgrade)
+select = ["E", "F", "W", "I", "UP"]
+ignore = [
+    "E501",  # line too long — the tutorial uses long print() lines
+]
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+# ---------------------------------------------------------------------------
+# Pytest configuration
+# Docs: https://docs.pytest.org/en/stable/reference/customize.html
+# ---------------------------------------------------------------------------
+[tool.pytest.ini_options]
+# Register the custom markers used by the testing_pytest lesson so pytest
+# does not warn about unknown markers.
+markers = [
+    "slow: marks tests that are slow to run (deselect with '-m \"not slow\"')",
+]

@@ -1,0 +1,9 @@
+Dear student,
+
+Welcome to the Intermediate Built-ins lesson! This note file is read
+by Section 1 to demonstrate working with text files using pathlib.
+
+Feel free to edit me — the program will read whatever you save.
+
+Best regards,
+The Python Team
