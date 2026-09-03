@@ -208,7 +208,7 @@ builtins_advanced/            (this folder)
 The built-ins series (basics → intermediate → advanced) is now complete. To
 keep growing:
 
-- **Testing** — add `unittest` or `pytest` to test the classes you created.
+- **Testing** — add `pytest` to test the classes you created.
 - **Packaging** — learn to structure multi-file projects with `pip install -e .`.
 - **Standard-library deep dives** — explore `asyncio`, `threading`, `sqlite3`,
   and `http` for real applications.

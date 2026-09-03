@@ -335,16 +335,3 @@ testing_pytest/               (this folder)
 ```
 
 ---
-
-## 🚀 Where to go next
-
-You now know how to write automated tests for pure Python. To keep growing:
-
-- **Test the CSV lessons** — write pytest tests for the `csv_basics_built_in`
-  helpers once you reach them.
-- **Test data code** — after the pandas lessons, use `pytest` + `tmp_path`
-  fixtures to test functions that read/write CSV files.
-- **Test-driven development (TDD)** — write the test _first_, watch it fail,
-  then write the code to make it pass.
-- Or continue the path with the **CSV / pandas** folders to apply Python to
-  data analysis.
