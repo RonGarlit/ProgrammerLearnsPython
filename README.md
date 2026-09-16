@@ -5,6 +5,37 @@ single-file program with a menu-driven loop, heavy commenting, and links to the
 official Python documentation — designed so you can study one concept at a time
 and repeat it as often as you like.
 
+## 📑 Table of contents
+
+- [What's in this repo](#-whats-in-this-repo)
+- [How to use these lessons](#-how-to-use-these-lessons)
+- [Completed lessons](#-completed-lessons)
+- [Upcoming lessons](#-upcoming-lessons)
+- [Prerequisites](#-prerequisites)
+
+---
+
+## 🚀 How to use these lessons
+
+Every lesson follows the same pattern, so once you've done one you know how to
+do them all:
+
+1. **Open the folder** for the lesson you want (see the table below).
+2. **Read that folder's `README.md`** — it explains the concepts, the
+   prerequisites, and how to run the program.
+3. **Run the program** from that folder (or from the project root — every
+   script resolves its own file paths, so it works either way).
+4. **Pick a menu option** — each lesson is menu-driven, so you can run one
+   section at a time and repeat any section as often as you like.
+5. **Step through it with the debugger** — every lesson's README includes a
+   🐞 debugging walkthrough. Setting a breakpoint and watching variables change
+   is the best way to really understand each concept.
+
+> 💡 **Tip:** The lessons are ordered as a **learning path** — each builds on
+> the ones before it. Start at the top and work down.
+
+---
+
 ## 📁 What's in this repo
 
 The lessons are ordered as a **learning path** — each builds on the ones before
@@ -23,13 +54,18 @@ it. Start at the top and work down.
 | 9  | [`csv_pandas_basics/`](csv_pandas_basics/README.md)             | ✅ Completed | Working with CSV data using **pandas** — `DataFrame`s (introductory)                                                        |
 | 10 | [`csv_pandas_intermediate/`](csv_pandas_intermediate/README.md) | ✅ Completed | Intermediate pandas: missing values, sorting, dates, merging, pivots, `.apply()`, strings                                   |
 | 11 | [`csv_pandas_advanced/`](csv_pandas_advanced/README.md)         | ✅ Completed | Advanced pandas: `MultiIndex`, reshape, categories, windows, time-series resampling, pipelines                              |
+| 12 | [`py_sql_server_basics/`](py_sql_server_basics/README.md)       | ✅ Completed | SQL Server basics: `pyodbc`, `CREATE TABLE` for every type family, CSV → SQL type casting, `OUTPUT` clause, spatial/`HIERARCHYID`/`XML` |
+| 13 | [`py_sql_server_intermediate/`](py_sql_server_intermediate/README.md) | ✅ Completed | SQL Server intermediate: the full **CRUD** cycle — `SELECT`/filtering/aggregates/`JOIN`s, `INSERT`/`UPDATE`/`DELETE`, transactions, and stored procedures |
 
 > 💡 **Why this order?** Lessons 1–3 teach the Python language itself. Lesson 4
 > introduces **automated testing** with pytest, so you can verify the code you
 > write. Lesson 5 introduces data files with the standard library. Lessons 6–8
 > teach **NumPy**, the fast array library that **pandas is built on top of**.
-> Lessons 9–11 then build pandas on that foundation. Following the path in
-> order means every lesson's prerequisites are already covered.
+> Lessons 9–11 then build pandas on that foundation. Lessons 12–13 turn to a
+> **relational database** — first getting CSV data into SQL Server (basics),
+> then querying and manipulating it with the full CRUD cycle (intermediate).
+> Following the path in order means every lesson's prerequisites are already
+> covered.
 
 ---
 
@@ -348,12 +384,96 @@ python pandas_advanced.py
 > 💡 **Key ideas:** MultiIndex labels, reshaping between long & wide, rolling/
 > expanding windows, and downsampling/upsampling time-series data.
 
+### 12. `py_sql_server_basics/` — SQL Server basics with `pyodbc`
+
+A lesson (`create_pytesttable.sql`, `pytesttable_data.csv`,
+`load_pytesttable.py`) that teaches how to connect Python to **SQL Server** and
+load CSV data into a table covering **every major SQL Server type family** —
+including the tricky ones (`XML`, `HIERARCHYID`, `GEOGRAPHY`, `GEOMETRY`,
+`SQL_VARIANT`). It's **menu-driven**, so you can set up, load, or clean up from
+one script:
+
+| # | Menu action | What it does                                                     |
+| - | ----------- | ---------------------------------------------------------------- |
+| 1 | **Setup**   | Runs `create_pytesttable.sql` to create `dbo.PyTestTable` (idempotent — safe to re-run) |
+| 2 | **Load**    | `pyodbc` connect + parameterized `INSERT` with `OUTPUT`; casts CSV strings to SQL types; commits; verifies |
+| 3 | **Cleanup** | Drops `dbo.PyTestTable` so you can start fresh                   |
+
+The concepts the load step teaches:
+
+| #   | Concept                          |
+| --- | -------------------------------- |
+| 1   | `CREATE TABLE` for every type family |
+| 2   | Three rows of boundary/edge/NULL test data |
+| 3   | `pyodbc` connect + parameterized `INSERT` with `OUTPUT` |
+| 4   | Casting CSV strings to SQL types (`CAST`/`CONVERT`) |
+| 5   | Spatial types, `HIERARCHYID`, `XML`, `SQL_VARIANT` |
+| 6   | Transactions (`autocommit=False` + `commit()`) |
+| 7   | Verification query |
+
+Run it from the `py_sql_server_basics/` folder (after creating the `PyTestDb`
+database once):
+
+```powershell
+pip install pyodbc
+python load_pytesttable.py
+```
+
+Then pick an action from the menu — tip: choose **Setup**, then **Load**.
+
+> 💡 **Key ideas:** CSV cells are always strings, so you must **cast** each one
+> to the right SQL type; `OUTPUT INSERTED.Id` captures the identity value;
+> `CONVERT(VARBINARY, ?, 1)` handles `0x`-prefixed hex; spatial WKT goes through
+> `GEOGRAPHY::STGeomFromText(?, 4326)`; `HIERARCHYID` is set with a follow-up
+> `UPDATE`.
+
+### 13. `py_sql_server_intermediate/` — SQL Server intermediate with `pyodbc`
+
+A menu-driven lesson (`create_pytestdb.sql`, `sql_server_intermediate.py`) that
+takes the next step: the **full CRUD cycle** against a small, realistic
+relational store schema (`Customers`, `Products`, `Orders`, `OrderItems`). It
+covers CRUD **two ways** — with plain SQL statements, then with **logical
+stored procedures** — plus transactions:
+
+| # | Menu | What it teaches                                                        |
+| - | ---- | ---------------------------------------------------------------------- |
+| 0 | Setup       | Runs `create_pytestdb.sql` to build the schema, seed data, and stored procedures |
+| c | Cleanup     | Drops the tables + stored procedures so you can start fresh            |
+| 1 | SELECT basics | `WHERE`, `ORDER BY`, `TOP`, `DISTINCT`, column aliases               |
+| 2 | Filtering   | `LIKE`, `IN`, `BETWEEN`, `IS NULL`                                     |
+| 3 | Aggregates  | `COUNT`/`SUM`/`AVG`/`MIN`/`MAX`, `GROUP BY`, `HAVING`                  |
+| 4 | JOINs       | `INNER`, `LEFT`, and a multi-table JOIN                                |
+| 5 | CREATE      | Parameterized `INSERT` with `OUTPUT INSERTED.Id`                       |
+| 6 | UPDATE      | `UPDATE ... SET ... WHERE` with `OUTPUT`                               |
+| 7 | DELETE      | `DELETE ... WHERE` with `OUTPUT`                                       |
+| 8 | Transactions| `BEGIN`/`COMMIT`/`ROLLBACK` with a forced error to show rollback       |
+| 9 | Stored procedures | `EXEC` with input + output params; walking multiple result sets  |
+| 10 | Mini task   | A full CRUD workflow combining everything                              |
+
+Run it from the `py_sql_server_intermediate/` folder:
+
+```powershell
+pip install pyodbc
+python sql_server_intermediate.py
+```
+
+Pick **0** (Setup) first to create and seed the schema — or just run the CRUD
+sections. Use **c** (Cleanup) anytime to reset.
+
+> 💡 **Key ideas:** real database work is **CRUD** — Create, Read, Update,
+> Delete. You can do it all with plain SQL, or wrap repeated logic in **stored
+> procedures** and just call them. This lesson shows both, and uses
+> `autocommit=False` + explicit transactions so a failure rolls back cleanly.
+
 ---
 
 ## 🚧 Upcoming lessons
 
-All planned lessons are complete. Ideas for future lessons:
+Ideas for future lessons (the pandas series and the SQL Server basics +
+intermediate lessons are complete):
 
+- **SQL Server advanced** — views, indexes, query tuning, dynamic SQL, and
+  bridging query results into pandas.
 - **Plotting & visualization** with `matplotlib` / `plotly` (`df.plot()`).
 - **Performance & big data** — chunked reading, `numba`, `dask`.
 - **Machine learning intro** — preparing DataFrames for `scikit-learn`.
@@ -380,4 +500,11 @@ python --version
 >
 > ```powershell
 > pip install pandas numpy
+> ```
+>
+> The `py_sql_server_basics/` and `py_sql_server_intermediate/` lessons require
+> **pyodbc** (plus a local SQL Server and the ODBC Driver 18 for SQL Server):
+>
+> ```powershell
+> pip install pyodbc
 > ```

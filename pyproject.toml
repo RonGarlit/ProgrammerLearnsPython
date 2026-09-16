@@ -11,6 +11,7 @@ requires-python = ">=3.11"
 dependencies = [
     "numpy>=1.26",
     "pandas>=2.0",
+    "pyodbc>=5.0",  # SQL Server connectivity (py_sql_server_basics lesson)
 ]
 
 # ---------------------------------------------------------------------------
