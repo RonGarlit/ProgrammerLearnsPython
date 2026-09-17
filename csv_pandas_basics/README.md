@@ -19,7 +19,7 @@ times as you like.
 | #   | Concept                    | What it shows                                              |
 | --- | -------------------------- | ---------------------------------------------------------- |
 | 0   | Clean up                   | Deletes the two generated CSV files so you can start fresh |
-| 1   | What is pandas?            | `Series` vs `DataFrame`, `pip install pandas`              |
+| 1   | What is pandas?            | `Series` vs `DataFrame`, `uv add pandas`              |
 | 2   | Reading with `read_csv`    | CSV → `DataFrame`, automatic type inference & index        |
 | 3   | Exploring a DataFrame      | `head`, `tail`, `info`, `describe`, `shape`, `unique`      |
 | 4   | Selecting columns & rows   | `df['col']`, `loc` (label), `iloc` (position)              |
@@ -39,10 +39,11 @@ times as you like.
 ## ✅ Prerequisites
 
 - **Python 3.9 or newer** (pandas requires a recent Python).
-- **pandas** installed:
+- **pandas** installed (it's already declared in `pyproject.toml`, so `uv sync`
+  installs it):
 
   ```powershell
-  pip install pandas
+  uv sync
   ```
 
 - **VS Code** with the **Python extension** (by Microsoft) installed.
@@ -51,11 +52,11 @@ times as you like.
 Check your Python version and pandas:
 
 ```powershell
-python --version
-python -c "import pandas; print(pandas.__version__)"
+uv run python --version
+uv run python -c "import pandas; print(pandas.__version__)"
 ```
 
-> If `pip install pandas` fails, try `python -m pip install pandas`.
+> If `uv sync` fails, try `uv add pandas` to add it to the project.
 
 ---
 
@@ -67,7 +68,7 @@ python -c "import pandas; print(pandas.__version__)"
 2. Run the script:
 
    ```powershell
-   python pandas_basics.py
+   uv run pandas_basics.py
    ```
 
 3. You'll see a menu. Type a number `0`–`9` to run a section, or `q` to quit.
@@ -76,7 +77,7 @@ python -c "import pandas; print(pandas.__version__)"
 > it also works from the project root:
 >
 > ```powershell
-> python csv_pandas_basics/pandas_basics.py
+> uv run csv_pandas_basics/pandas_basics.py
 > ```
 >
 > No matter which folder you run it from, it reads and writes the CSV files in
@@ -216,7 +217,8 @@ Here's a suggested debugging session to learn the flow:
 ## 🧠 Common gotchas
 
 - **`ModuleNotFoundError: No module named 'pandas'`?** pandas isn't installed.
-  Run `pip install pandas` (or `python -m pip install pandas`).
+  Run `uv sync` (or `uv add pandas`) to install it into the project's virtual
+  environment.
 - **Breakpoint not hit?** Make sure the file you're debugging is the one with
   the breakpoint, and that you started with **Run ▸ Start Debugging** (`F5`),
   not just **Run** (`Ctrl+F5`). `Ctrl+F5` runs _without_ debugging and ignores

@@ -38,10 +38,11 @@ times as you like.
 
 ## ✅ Prerequisites
 
-- **Python 3.9 or newer** and **pandas** installed:
+- **Python 3.9 or newer** and **pandas** installed (it's already declared in
+  `pyproject.toml`, so `uv sync` installs it):
 
   ```powershell
-  pip install pandas
+  uv sync
   ```
 
 - **Complete `csv_pandas_basics` first** (this builds directly on it).
@@ -50,8 +51,8 @@ times as you like.
 Check your Python version and pandas:
 
 ```powershell
-python --version
-python -c "import pandas; print(pandas.__version__)"
+uv run python --version
+uv run python -c "import pandas; print(pandas.__version__)"
 ```
 
 ---
@@ -64,7 +65,7 @@ python -c "import pandas; print(pandas.__version__)"
 2. Run the script:
 
    ```powershell
-   python pandas_intermediate.py
+   uv run pandas_intermediate.py
    ```
 
 3. You'll see a menu. Type a number `0`–`9` to run a section, or `q` to quit.
@@ -73,7 +74,7 @@ python -c "import pandas; print(pandas.__version__)"
 > it also works from the project root:
 >
 > ```powershell
-> python csv_pandas_intermediate/pandas_intermediate.py
+> uv run csv_pandas_intermediate/pandas_intermediate.py
 > ```
 
 ### Option B — Run from VS Code
@@ -178,7 +179,8 @@ type `4` to run the merge section. Step Into `section_merging()` and watch the
 ## 🧠 Common gotchas
 
 - **`ModuleNotFoundError: No module named 'pandas'`?** Run
-  `pip install pandas` (or `python -m pip install pandas`).
+  `uv sync` (or `uv add pandas`) to install it into the project's virtual
+  environment.
 - **NaN shows up as `NaN`/`nan`?** That's pandas' marker for a missing value.
   Use `isna()`, `dropna()`, or `fillna()` to handle it.
 - **`'.dt' accessor` error?** You called `.dt` on a column that is still text.

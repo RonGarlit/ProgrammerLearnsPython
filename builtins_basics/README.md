@@ -39,7 +39,7 @@ in isolation and repeat it as many times as you like.
 Check your Python version:
 
 ```powershell
-python --version
+uv run python --version
 ```
 
 ---
@@ -52,7 +52,7 @@ python --version
 2. Run the script:
 
    ```powershell
-   python builtins_essentials.py
+   uv run builtins_essentials.py
    ```
 
 3. You'll see a menu. Type a number `1`–`8` to run a section, or `q` to quit.
@@ -208,7 +208,8 @@ Here's a suggested debugging session to learn the flow:
 - **Can't type input?** The program reads from the **Terminal** panel. If you're
   looking at the Output panel, switch to Terminal.
 - **"No module named..."?** This project uses only the Python standard library —
-  no third-party packages — so there's nothing to install.
+  no third-party packages — so there's nothing to install. Run the script with
+  `uv run` so it uses the project's virtual environment.
 
 ---
 

@@ -52,7 +52,7 @@ folder — and it is the first lesson that introduces a **test framework**
   Or install it directly:
 
   ```powershell
-  pip install pytest
+  uv add --dev pytest
   ```
 
 > 💡 **Note:** This lesson uses only the Python **standard library** plus
@@ -68,7 +68,7 @@ folder — and it is the first lesson that introduces a **test framework**
 2. Run the script:
 
    ```powershell
-   python testing_pytest.py
+   uv run testing_pytest.py
    ```
 
 3. You'll see a menu. Type a number `0`–`8` to run a section, or `q` to quit.
@@ -77,7 +77,7 @@ folder — and it is the first lesson that introduces a **test framework**
 > it also works from the project root:
 >
 > ```powershell
-> python testing_pytest/testing_pytest.py
+> uv run testing_pytest/testing_pytest.py
 > ```
 
 ### Option B — Run from VS Code
@@ -99,11 +99,11 @@ The real payoff of this lesson is running the test files with pytest. From
 this folder:
 
 ```powershell
-pytest                 # run every test_*.py file
-pytest -v              # verbose: show each test name
-pytest test_bank_account.py   # run one file
-pytest -k deposit      # run tests whose name contains "deposit"
-pytest -m "not slow"   # skip tests marked "slow"
+uv run pytest                 # run every test_*.py file
+uv run pytest -v              # verbose: show each test name
+uv run pytest test_bank_account.py   # run one file
+uv run pytest -k deposit      # run tests whose name contains "deposit"
+uv run pytest -m "not slow"   # skip tests marked "slow"
 ```
 
 You should see a green summary like `N passed`. If a test fails, pytest shows

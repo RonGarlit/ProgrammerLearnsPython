@@ -3,7 +3,7 @@
 # Managed with uv (https://docs.astral.sh/uv/)
 # ---------------------------------------------------------------------------
 [project]
-name = "python-for-beginners"
+name = "Programmer-Learns-Python"
 version = "0.1.0"
 description = "A collection of self-guided, interactive Python lessons for beginners."
 readme = "README.md"
@@ -12,6 +12,7 @@ dependencies = [
     "numpy>=1.26",
     "pandas>=2.0",
     "pyodbc>=5.0",  # SQL Server connectivity (py_sql_server_basics lesson)
+    "sqlalchemy>=2.0",  # pandas <-> SQL Server integration (py_sql_server_advanced lesson)
 ]
 
 # ---------------------------------------------------------------------------

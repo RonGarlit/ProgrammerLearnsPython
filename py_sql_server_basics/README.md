@@ -38,10 +38,11 @@ the proper SQL types.
 - **SQL Server** running locally (or a reachable server) with the **`PyTestDb`**
   database created.
 - **ODBC Driver 18 for SQL Server** installed on your machine.
-- **pyodbc** installed:
+- **pyodbc** installed (it's already declared in `pyproject.toml`, so `uv sync`
+  installs it):
 
   ```powershell
-  pip install pyodbc
+  uv sync
   ```
 
 - **VS Code** with the **Python extension** (by Microsoft) installed.
@@ -49,11 +50,11 @@ the proper SQL types.
 Check your Python version and pyodbc:
 
 ```powershell
-python --version
-python -c "import pyodbc; print(pyodbc.version)"
+uv run python --version
+uv run python -c "import pyodbc; print(pyodbc.version)"
 ```
 
-> If `pip install pyodbc` fails, try `python -m pip install pyodbc`.
+> If `uv sync` fails, try `uv add pyodbc` to add it to the project.
 
 ---
 
@@ -85,7 +86,7 @@ fresh.
 2. Run the loader:
 
    ```powershell
-   python load_pytesttable.py
+   uv run load_pytesttable.py
    ```
 
 3. You'll see a menu with three actions. Type a number to run one, or `q` to
@@ -105,7 +106,7 @@ fresh.
 > it also works from the project root:
 >
 > ```powershell
-> python py_sql_server_basics/load_pytesttable.py
+> uv run py_sql_server_basics/load_pytesttable.py
 > ```
 >
 > No matter which folder you run it from, it reads `pytesttable_data.csv` in

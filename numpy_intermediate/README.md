@@ -38,10 +38,11 @@ in isolation and repeat it as many times as you like.
 
 ## ✅ Prerequisites
 
-- **Python 3.9 or newer** and **NumPy** installed:
+- **Python 3.9 or newer** and **NumPy** installed (it's already declared in
+  `pyproject.toml`, so `uv sync` installs it):
 
   ```powershell
-  pip install numpy
+  uv sync
   ```
 
 - **Complete `numpy_basics` first.**
@@ -50,8 +51,8 @@ in isolation and repeat it as many times as you like.
 Check your Python version and NumPy:
 
 ```powershell
-python --version
-python -c "import numpy; print(numpy.__version__)"
+uv run python --version
+uv run python -c "import numpy; print(numpy.__version__)"
 ```
 
 ---
@@ -64,7 +65,7 @@ python -c "import numpy; print(numpy.__version__)"
 2. Run the script:
 
    ```powershell
-   python numpy_intermediate.py
+   uv run numpy_intermediate.py
    ```
 
 3. You'll see a menu. Type a number `0`–`9` to run a section, or `q` to quit.
@@ -73,7 +74,7 @@ python -c "import numpy; print(numpy.__version__)"
 > it also works from the project root:
 >
 > ```powershell
-> python numpy_intermediate/numpy_intermediate.py
+> uv run numpy_intermediate/numpy_intermediate.py
 > ```
 
 ### Option B — Run from VS Code

@@ -39,10 +39,11 @@ study it in isolation and repeat it as many times as you like.
 
 ## ✅ Prerequisites
 
-- **Python 3.9 or newer** and **pandas** installed:
+- **Python 3.9 or newer** and **pandas** installed (it's already declared in
+  `pyproject.toml`, so `uv sync` installs it):
 
   ```powershell
-  pip install pandas
+  uv sync
   ```
 
 - **Complete `csv_pandas_basics` and `csv_pandas_intermediate` first.**
@@ -51,8 +52,8 @@ study it in isolation and repeat it as many times as you like.
 Check your Python version and pandas:
 
 ```powershell
-python --version
-python -c "import pandas; print(pandas.__version__)"
+uv run python --version
+uv run python -c "import pandas; print(pandas.__version__)"
 ```
 
 ---
@@ -65,7 +66,7 @@ python -c "import pandas; print(pandas.__version__)"
 2. Run the script:
 
    ```powershell
-   python pandas_advanced.py
+   uv run pandas_advanced.py
    ```
 
 3. You'll see a menu. Type a number `0`–`9` to run a section, or `q` to quit.
@@ -74,7 +75,7 @@ python -c "import pandas; print(pandas.__version__)"
 > it also works from the project root:
 >
 > ```powershell
-> python csv_pandas_advanced/pandas_advanced.py
+> uv run csv_pandas_advanced/pandas_advanced.py
 > ```
 
 ### Option B — Run from VS Code
@@ -178,7 +179,8 @@ watch `daily.resample('ME').sum()` aggregate days into months.
 ## 🧠 Common gotchas
 
 - **`ModuleNotFoundError: No module named 'pandas'`?** Run
-  `pip install pandas` (or `python -m pip install pandas`).
+  `uv sync` (or `uv add pandas`) to install it into the project's virtual
+  environment.
 - **`PerformanceWarning: indexing past lexsort depth`?** The MultiIndex wasn't
   sorted. Call `.sort_index()` on it (this lesson does) before slicing.
 - **`.dt` accessor error?** The column is still text. Convert with

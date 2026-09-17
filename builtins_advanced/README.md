@@ -45,11 +45,12 @@ you like.
 Check your Python version:
 
 ```powershell
-python --version
+uv run python --version
 ```
 
 > 💡 **Note:** This lesson uses only the Python standard library — nothing to
-> `pip install`. Type hints use the built-in `typing` module.
+> install. Run it with `uv run` so it uses the project's virtual environment.
+> Type hints use the built-in `typing` module.
 
 ---
 
@@ -61,7 +62,7 @@ python --version
 2. Run the script:
 
    ```powershell
-   python builtins_advanced.py
+   uv run builtins_advanced.py
    ```
 
 3. You'll see a menu. Type a number `0`–`9` to run a section, or `q` to quit.
@@ -70,7 +71,7 @@ python --version
 > it also works from the project root:
 >
 > ```powershell
-> python builtins_advanced/builtins_advanced.py
+> uv run builtins_advanced/builtins_advanced.py
 > ```
 
 ### Option B — Run from VS Code
@@ -209,7 +210,7 @@ The built-ins series (basics → intermediate → advanced) is now complete. To
 keep growing:
 
 - **Testing** — add `pytest` to test the classes you created.
-- **Packaging** — learn to structure multi-file projects with `pip install -e .`.
+- **Packaging** — learn to structure multi-file projects with `uv pip install -e .`.
 - **Standard-library deep dives** — explore `asyncio`, `threading`, `sqlite3`,
   and `http` for real applications.
 - Or jump into the **CSV / pandas** folders to apply Python to data analysis.

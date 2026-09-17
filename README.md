@@ -9,6 +9,7 @@ and repeat it as often as you like.
 
 - [What's in this repo](#-whats-in-this-repo)
 - [How to use these lessons](#-how-to-use-these-lessons)
+- [Setup: virtual environment & dependencies](#-setup-virtual-environment--dependencies)
 - [Completed lessons](#-completed-lessons)
 - [Upcoming lessons](#-upcoming-lessons)
 - [Prerequisites](#-prerequisites)
@@ -36,6 +37,74 @@ do them all:
 
 ---
 
+## ⚙️ Setup: virtual environment & dependencies
+
+This project is managed with **uv** (https://docs.astral.sh/uv/) — a fast
+Python package and project manager written in Rust. All dependencies for every
+lesson are declared in `pyproject.toml`, so a single command creates a virtual
+environment in the project root and installs everything you need.
+
+### 1. Install uv (once)
+
+If you don't have `uv` yet, install it with:
+
+```powershell
+pip install uv
+```
+
+> 💡 **Tip:** `uv` can also be installed standalone — see the
+> [official install guide](https://docs.astral.sh/uv/getting-started/installation/).
+
+Verify it's available:
+
+```powershell
+uv --version
+```
+
+### 2. Create the virtual environment & install dependencies
+
+From the **project root** (`PythonforBeginners/`), run:
+
+```powershell
+uv sync
+```
+
+This does two things:
+
+1. **Creates a virtual environment** in the project root (a `.venv/` folder)
+   using the Python version required by `pyproject.toml` (`>=3.11`).
+2. **Installs all dependencies** into that environment — NumPy, pandas,
+   pyodbc, SQLAlchemy, plus the dev tools (pytest, ruff).
+
+> 💡 **Note:** `uv sync` reads `pyproject.toml` and installs the exact
+> dependencies it declares. If you ever add a new package, use
+> `uv add <package>` (or `uv add --dev <package>` for a dev tool) and it will
+> update `pyproject.toml` and the environment for you.
+
+### 3. Activate the environment (optional)
+
+`uv run` activates the environment automatically for each command, so you
+usually don't need to activate it manually. If you want an interactive shell
+inside the environment, activate it with:
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+### 4. Run a lesson
+
+Now you can run any lesson from the project root or its folder:
+
+```powershell
+uv run numpy_basics.py
+uv run pytest
+```
+
+> 💡 **Tip:** Every `uv run ...` command in the lesson READMEs uses this same
+> environment, so once you've run `uv sync` you're ready to go.
+
+---
+
 ## 📁 What's in this repo
 
 The lessons are ordered as a **learning path** — each builds on the ones before
@@ -56,14 +125,16 @@ it. Start at the top and work down.
 | 11 | [`csv_pandas_advanced/`](csv_pandas_advanced/README.md)         | ✅ Completed | Advanced pandas: `MultiIndex`, reshape, categories, windows, time-series resampling, pipelines                              |
 | 12 | [`py_sql_server_basics/`](py_sql_server_basics/README.md)       | ✅ Completed | SQL Server basics: `pyodbc`, `CREATE TABLE` for every type family, CSV → SQL type casting, `OUTPUT` clause, spatial/`HIERARCHYID`/`XML` |
 | 13 | [`py_sql_server_intermediate/`](py_sql_server_intermediate/README.md) | ✅ Completed | SQL Server intermediate: the full **CRUD** cycle — `SELECT`/filtering/aggregates/`JOIN`s, `INSERT`/`UPDATE`/`DELETE`, transactions, and stored procedures |
+| 14 | [`py_sql_server_advanced/`](py_sql_server_advanced/README.md)   | ✅ Completed | SQL Server advanced: indexes, query tuning, views, CTEs & window functions, bulk operations, dynamic SQL, transactions & isolation, pandas ↔ SQL Server |
 
 > 💡 **Why this order?** Lessons 1–3 teach the Python language itself. Lesson 4
 > introduces **automated testing** with pytest, so you can verify the code you
 > write. Lesson 5 introduces data files with the standard library. Lessons 6–8
 > teach **NumPy**, the fast array library that **pandas is built on top of**.
-> Lessons 9–11 then build pandas on that foundation. Lessons 12–13 turn to a
+> Lessons 9–11 then build pandas on that foundation. Lessons 12–14 turn to a
 > **relational database** — first getting CSV data into SQL Server (basics),
-> then querying and manipulating it with the full CRUD cycle (intermediate).
+> then querying and manipulating it with the full CRUD cycle (intermediate),
+> then making it fast, safe, and integrated with pandas (advanced).
 > Following the path in order means every lesson's prerequisites are already
 > covered.
 
@@ -91,7 +162,7 @@ the core building blocks of the language, one concept per section:
 Run it from the `builtins_basics/` folder:
 
 ```powershell
-python builtins_essentials.py
+uv run builtins_essentials.py
 ```
 
 ### 2. `builtins_intermediate/` — Intermediate Built-ins
@@ -116,10 +187,10 @@ files, JSON, dates, specialized containers, and expressive syntax — all built-
 Run it from the `builtins_intermediate/` folder:
 
 ```powershell
-python builtins_intermediate.py
+uv run builtins_intermediate.py
 ```
 
-> 💡 **Key ideas:** all built-in (no `pip install`); `pathlib` for files, `json`
+> 💡 **Key ideas:** all built-in (no `uv add`); `pathlib` for files, `json`
 > for data exchange, `datetime` for time, `collections` for containers.
 
 ### 3. `builtins_advanced/` — Advanced Built-ins
@@ -144,7 +215,7 @@ standard library:
 Run it from the `builtins_advanced/` folder:
 
 ```powershell
-python builtins_advanced.py
+uv run builtins_advanced.py
 ```
 
 > 💡 **Key ideas:** classes & inheritance, decorators, custom context managers,
@@ -172,9 +243,8 @@ run `pytest` and see real pass/fail reports:
 Run it from the `testing_pytest/` folder:
 
 ```powershell
-pip install pytest
-python testing_pytest.py
-pytest
+uv run testing_pytest.py
+uv run pytest
 ```
 
 > 💡 **Key ideas:** `assert`, pytest discovery rules, fixtures, parametrization,
@@ -200,7 +270,7 @@ write CSV files using only Python's standard library — no third-party packages
 Run it from the `csv_basics_built_in/` folder:
 
 ```powershell
-python csv_basics.py
+uv run csv_basics.py
 ```
 
 > 💡 **Tip:** Sections 2–6 create small `.csv` files (`employees.csv`,
@@ -229,8 +299,7 @@ NumPy, so this is the foundation for everything that follows:
 Run it from the `numpy_basics/` folder:
 
 ```powershell
-pip install numpy
-python numpy_basics.py
+uv run numpy_basics.py
 ```
 
 > 💡 **Key ideas:** the `ndarray`, vectorized element-wise math, ufuncs, and
@@ -258,8 +327,7 @@ numerical data:
 Run it from the `numpy_intermediate/` folder:
 
 ```powershell
-pip install numpy
-python numpy_intermediate.py
+uv run numpy_intermediate.py
 ```
 
 > 💡 **Key ideas:** filtering with boolean masks, fancy indexing, broadcasting
@@ -287,8 +355,7 @@ scale**:
 Run it from the `numpy_advanced/` folder:
 
 ```powershell
-pip install numpy
-python numpy_advanced.py
+uv run numpy_advanced.py
 ```
 
 > 💡 **Key ideas:** dtype & memory control, handling missing data, fitting
@@ -318,8 +385,7 @@ come in as numbers and math just works:
 Run it from the `csv_pandas_basics/` folder:
 
 ```powershell
-pip install pandas
-python pandas_basics.py
+uv run pandas_basics.py
 ```
 
 > 💡 **Tip:** Section 8 creates `high_sales.csv` and `monthly_summary.csv` in
@@ -347,8 +413,7 @@ messy data with missing values) to teach the tools you reach for on real work:
 Run it from the `csv_pandas_intermediate/` folder:
 
 ```powershell
-pip install pandas
-python pandas_intermediate.py
+uv run pandas_intermediate.py
 ```
 
 > 💡 **Key ideas:** handling missing values, merging tables like a SQL join,
@@ -377,8 +442,7 @@ hierarchical, time-based, and large-scale data:
 Run it from the `csv_pandas_advanced/` folder:
 
 ```powershell
-pip install pandas
-python pandas_advanced.py
+uv run pandas_advanced.py
 ```
 
 > 💡 **Key ideas:** MultiIndex labels, reshaping between long & wide, rolling/
@@ -415,8 +479,7 @@ Run it from the `py_sql_server_basics/` folder (after creating the `PyTestDb`
 database once):
 
 ```powershell
-pip install pyodbc
-python load_pytesttable.py
+uv run load_pytesttable.py
 ```
 
 Then pick an action from the menu — tip: choose **Setup**, then **Load**.
@@ -453,8 +516,7 @@ stored procedures** — plus transactions:
 Run it from the `py_sql_server_intermediate/` folder:
 
 ```powershell
-pip install pyodbc
-python sql_server_intermediate.py
+uv run sql_server_intermediate.py
 ```
 
 Pick **0** (Setup) first to create and seed the schema — or just run the CRUD
@@ -484,27 +546,25 @@ intermediate lessons are complete):
 
 - **Python 3.11 or newer** (matches `requires-python` in `pyproject.toml`).
 - **VS Code** with the **Python extension** (by Microsoft) installed.
+- **uv** installed and the project's virtual environment set up — see the
+  [⚙️ Setup section](#-setup-virtual-environment--dependencies) above.
 
 Check your Python version:
 
 ```powershell
-python --version
+uv run python --version
 ```
 
 > 💡 **Note:** The `builtins_basics/`, `builtins_intermediate/`,
 > `builtins_advanced/`, and `csv_basics_built_in/` lessons use only the Python
-> standard library — nothing to `pip install`. All three NumPy lessons
+> standard library — nothing extra to install. All three NumPy lessons
 > (`numpy_basics/`, `numpy_intermediate/`, `numpy_advanced/`) require **NumPy**,
 > and all three pandas lessons (`csv_pandas_basics/`,
-> `csv_pandas_intermediate/`, `csv_pandas_advanced/`) require **pandas**:
+> `csv_pandas_intermediate/`, `csv_pandas_advanced/`) require **pandas**. The
+> `py_sql_server_basics/`, `py_sql_server_intermediate/`, and
+> `py_sql_server_advanced/` lessons require **pyodbc** (plus a local SQL Server
+> and the ODBC Driver 18 for SQL Server).
 >
-> ```powershell
-> pip install pandas numpy
-> ```
->
-> The `py_sql_server_basics/` and `py_sql_server_intermediate/` lessons require
-> **pyodbc** (plus a local SQL Server and the ODBC Driver 18 for SQL Server):
->
-> ```powershell
-> pip install pyodbc
-> ```
+> All of these dependencies are already declared in `pyproject.toml`, so a
+> single `uv sync` (see the [⚙️ Setup section](#-setup-virtual-environment--dependencies))
+> installs everything into the project's virtual environment.

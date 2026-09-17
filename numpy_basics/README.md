@@ -19,7 +19,7 @@ repeat it as many times as you like.
 | #   | Concept             | What it shows                                               |
 | --- | ------------------- | ----------------------------------------------------------- |
 | 0   | Clean up            | Deletes the two generated files so you can start fresh      |
-| 1   | What is NumPy?      | The `ndarray`, `pip install numpy`, why it's fast           |
+| 1   | What is NumPy?      | The `ndarray`, `uv add numpy`, why it's fast           |
 | 2   | Creating arrays     | `np.array`, `arange`, `zeros`, `ones`, `linspace`           |
 | 3   | Exploring an array  | `shape`, `ndim`, `size`, `dtype`                            |
 | 4   | Indexing & slicing  | `arr[i]`, `arr[row, col]`, slices are views                 |
@@ -39,10 +39,11 @@ repeat it as many times as you like.
 ## ✅ Prerequisites
 
 - **Python 3.9 or newer** (NumPy requires a recent Python).
-- **NumPy** installed:
+- **NumPy** installed (it's already declared in `pyproject.toml`, so `uv sync`
+  installs it):
 
   ```powershell
-  pip install numpy
+  uv sync
   ```
 
 - **VS Code** with the **Python extension** (by Microsoft) installed.
@@ -51,11 +52,11 @@ repeat it as many times as you like.
 Check your Python version and NumPy:
 
 ```powershell
-python --version
-python -c "import numpy; print(numpy.__version__)"
+uv run python --version
+uv run python -c "import numpy; print(numpy.__version__)"
 ```
 
-> If `pip install numpy` fails, try `python -m pip install numpy`.
+> If `uv sync` fails, try `uv add numpy` to add it to the project.
 
 ---
 
@@ -67,7 +68,7 @@ python -c "import numpy; print(numpy.__version__)"
 2. Run the script:
 
    ```powershell
-   python numpy_basics.py
+   uv run numpy_basics.py
    ```
 
 3. You'll see a menu. Type a number `0`–`9` to run a section, or `q` to quit.
@@ -76,7 +77,7 @@ python -c "import numpy; print(numpy.__version__)"
 > it also works from the project root:
 >
 > ```powershell
-> python numpy_basics/numpy_basics.py
+> uv run numpy_basics/numpy_basics.py
 > ```
 >
 > No matter which folder you run it from, it reads and writes the files in

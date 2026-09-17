@@ -10,7 +10,7 @@ methods of talking to the database.
 
 > This folder covers **SQL Server intermediate**. Advanced topics (views,
 > indexes, query tuning, dynamic SQL, pandas ↔ SQL Server integration, etc.)
-> will be built out in a later advanced folder.
+> are built out in the **`py_sql_server_advanced`** folder.
 
 ---
 

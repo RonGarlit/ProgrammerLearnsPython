@@ -30,7 +30,7 @@ in isolation and repeat it as many times as you like.
 | 9   | Mini task                 | Read a JSON log, count with `Counter`, write a summary   |
 
 > 💡 **Key idea:** Python's **standard library** is a treasure chest of
-> built-in tools — no `pip install` needed. This lesson covers the modules and
+> built-in tools — no `uv add` needed. This lesson covers the modules and
 > syntax you'll use every single day.
 
 ---
@@ -43,11 +43,12 @@ in isolation and repeat it as many times as you like.
 Check your Python version:
 
 ```powershell
-python --version
+uv run python --version
 ```
 
 > 💡 **Note:** This lesson uses only the Python standard library — there is
-> nothing to `pip install`.
+> nothing to install. Run it with `uv run` so it uses the project's virtual
+> environment.
 
 ---
 
@@ -59,7 +60,7 @@ python --version
 2. Run the script:
 
    ```powershell
-   python builtins_intermediate.py
+   uv run builtins_intermediate.py
    ```
 
 3. You'll see a menu. Type a number `0`–`9` to run a section, or `q` to quit.
@@ -68,7 +69,7 @@ python --version
 > it also works from the project root:
 >
 > ```powershell
-> python builtins_intermediate/builtins_intermediate.py
+> uv run builtins_intermediate/builtins_intermediate.py
 > ```
 
 ### Option B — Run from VS Code

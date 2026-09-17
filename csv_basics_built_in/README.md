@@ -24,7 +24,7 @@ as many times as you like.
 | 6   | Quoting tricky data         | Commas & newlines inside fields are handled for you         |
 | 7   | Mini task                   | Average salary — reading + conversion + filtering           |
 
-> 💡 **Key idea:** The `csv` module is built into Python — no `pip install`
+> 💡 **Key idea:** The `csv` module is built into Python — no `uv add`
 > needed. `DictReader`/`DictWriter` work with dictionaries; `reader`/`writer`
 > work with plain lists.
 
@@ -39,7 +39,7 @@ as many times as you like.
 Check your Python version:
 
 ```powershell
-python --version
+uv run python --version
 ```
 
 ---
@@ -52,7 +52,7 @@ python --version
 2. Run the script:
 
    ```powershell
-   python csv_basics.py
+   uv run csv_basics.py
    ```
 
 3. You'll see a menu. Type a number `0`–`7` to run a section, or `q` to quit.
@@ -230,7 +230,8 @@ Here's a suggested debugging session to learn the flow:
 - **Can't type input?** The program reads from the **Terminal** panel. If you're
   looking at the Output panel, switch to Terminal.
 - **"No module named..."?** This project uses only the Python standard library
-  — there is nothing to install.
+  — there is nothing to install. Run the script with `uv run` so it uses the
+  project's virtual environment.
 - **My CSV looks wrong in Excel?** That's Excel's number formatting, not the
   file. Open the `.csv` in a plain-text editor (or VS Code) to see the real
   saved data.
